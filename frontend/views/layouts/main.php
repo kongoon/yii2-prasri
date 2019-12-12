@@ -62,14 +62,14 @@ AppAsset::register($this);
         NavBar::end();
         ?>
 
-        <div class="container">
+        <div class="container-fluid">
             <?= Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?>
             <?= Alert::widget() ?>
 
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 mymenu">
 
                     <?php
                     $items = [
@@ -88,6 +88,10 @@ AppAsset::register($this);
                         ['label' => 'รายการสถานะ', 'url' => ['/fix/status/index']],
                         ['label' => 'เพิ่มสถานะ', 'url' => ['/fix/status/create']],
                     ]];
+
+                    // Service
+                    $items[] = '<li><h4 class="text-center">บริการ</h4></li>';
+                    $items[] = ['label' => 'แจ้งซ่อม', 'url' => ['/service/fix-transaction/index']];
                     ?>
                     <?=Nav::widget([
                         'items' => $items,
