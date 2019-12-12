@@ -10,7 +10,7 @@ use yii\behaviors\TimestampBehavior;
  * This is the model class for table "post".
  *
  * @property int $id
- * @property string $name หัวข้อ
+ * @property string $name เรื่อง
  * @property string $body รายละเอียด
  * @property int|null $created_at เพิ่มเมื่อ
  * @property int|null $updated_at แก้ไขเมื่อ
@@ -29,7 +29,6 @@ class Post extends \yii\db\ActiveRecord
             BlameableBehavior::class,
         ];
     }
-    
     /**
      * {@inheritdoc}
      */
@@ -60,7 +59,7 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'หัวข้อ',
+            'name' => 'เรื่อง',
             'body' => 'รายละเอียด',
             'created_at' => 'เพิ่มเมื่อ',
             'updated_at' => 'แก้ไขเมื่อ',
@@ -74,7 +73,7 @@ class Post extends \yii\db\ActiveRecord
      */
     public function getCreatedBy()
     {
-        return $this->hasOne(User::className(), ['id' => 'created_by']);
+        return $this->hasOne(User::class, ['id' => 'created_by']);
     }
 
     /**
@@ -82,6 +81,6 @@ class Post extends \yii\db\ActiveRecord
      */
     public function getUpdatedBy()
     {
-        return $this->hasOne(User::className(), ['id' => 'updated_by']);
+        return $this->hasOne(User::class, ['id' => 'updated_by']);
     }
 }

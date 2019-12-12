@@ -21,17 +21,23 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
+        
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'name',
-            'body:ntext',
+            //'body:ntext',
             'created_at:datetime',
-            'updated_at',
-            //'created_by',
+            'updated_at:datetime',
+            [
+                'attribute' => 'created_by',
+                'value' => function ($model) {
+                    return $model->createdBy->email;
+                }
+            ],
             //'updated_by',
 
             ['class' => 'yii\grid\ActionColumn'],
