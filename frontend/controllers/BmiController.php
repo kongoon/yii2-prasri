@@ -19,4 +19,9 @@ class BmiController extends Controller
             'bmi' => $bmi
         ]);
     }
+    public function actionTest()
+    {
+        
+    }
+
 }
