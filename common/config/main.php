@@ -1,5 +1,8 @@
 <?php
 return [
+    'name' => 'PraSri4.0',
+    'language' => 'th',
+    'timeZone' => 'Asia/Bangkok',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
