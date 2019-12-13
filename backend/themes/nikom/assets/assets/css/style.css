@@ -1,0 +1,36 @@
+body {
+    font-family: "Kanit";
+}
+
+.navigation-header span {
+    font-weight: bold !important;
+    font-size: 16px;
+}
+
+.card-header {
+    background-color: transparent !important;
+}
+
+.hint-block {
+    color: #2DCEE3;
+    font-size: small;
+}
+
+.help-block {
+    color: #FF7588;
+    font-size: small;
+}
+
+.error-summary {
+    display: block;
+    color: #FF7588;
+    border: 2px solid #FF7588;
+    padding: 20px;
+    background-color: #ffd0d9;
+    margin-bottom: 20px;
+}
+
+.brand-text {
+    font-family: "Oswald";
+    font-weight: 700;
+}
