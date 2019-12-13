@@ -6,6 +6,7 @@ use Yii;
 use common\models\FixTransaction;
 use yii\base\Exception;
 use backend\modules\service\models\FixTransactionSearch;
+use common\models\SupplyItem;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -91,6 +92,11 @@ class FixTransactionController extends Controller
             try {
                 $model->validate();
                 $model->save();
+
+                $item = SupplyItem::findOne(['id' => $model->supply_item_id]);
+                $item->is_ready = 0;
+                $item->save();
+                
                 Yii::$app->session->setFlash('success', 'บันทึกข้อมูลเรียบร้อย');
 
                 Yii::$app->hanuman->sendLine('มีการแจ้งซ่อมใหม่ ครุภัณฑ์: '.$model->supplyItem->name.' อาการ:'.$model->detail);

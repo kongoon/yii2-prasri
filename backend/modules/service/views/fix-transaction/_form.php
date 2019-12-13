@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'supply_item_id')->widget(Select2::class, [
-        'data' => ArrayHelper::map(SupplyItem::find()->all(), 'id', function($model){
+        'data' => ArrayHelper::map(SupplyItem::find()->where(['is_ready' => 1])->all(), 'id', function($model){
             return $model->no.' '.$model->name;
         }),
         'theme' => Select2::THEME_BOOTSTRAP,
