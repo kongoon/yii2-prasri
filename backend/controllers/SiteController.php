@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\FixTransaction;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -31,7 +32,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index', 'pdf'],
+                        'actions' => ['logout', 'index', 'pdf', 'preview'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -141,10 +142,16 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-
-    public function actionPdf()
+    public function actionPreview()
     {
-        $content = $this->renderPartial('_pdf');
+        return $this->render('preview');
+    }
+
+    public function actionPdf($id)
+    {
+        $model = FixTransaction::findOne($id);
+
+        $content = $this->renderPartial('_pdf', ['model' => $model]);
 
         // setup kartik\mpdf\Pdf component
         $pdf = new Pdf([

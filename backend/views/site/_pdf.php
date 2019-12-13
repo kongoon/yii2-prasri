@@ -1,3 +1,3 @@
 <div>
-    <h4>สวัสดี</h4>
+    <h4><?=$model->supplyItem->name?></h4>
 </div>
