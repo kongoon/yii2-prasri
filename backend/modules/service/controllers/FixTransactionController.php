@@ -38,6 +38,7 @@ class FixTransactionController extends Controller
     {
         $searchModel = new FixTransactionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andFilterWhere(['transaction_by' => Yii::$app->user->getId()]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -75,7 +76,15 @@ class FixTransactionController extends Controller
             //$model->transaction_by = Yii::$app->user->getId();
             $model->transaction_at = time();
             //$model->fix_status_id = 1;
-            
+            $current = FixTransaction::find()->where(['supply_item_id' => $model->supply_item_id])
+                ->andWhere(['!=', 'fix_status_id', 4])
+                ->one();
+
+            if($current){
+                Yii::$app->session->setFlash('error', 'อยู่ระหว่างดำเนินการ ไม่สามารถส่งซ่อมได้อีก');
+                return $this->redirect(['index']);
+            }
+
             try {
                 $model->validate();
                 $model->save();
@@ -137,7 +146,7 @@ class FixTransactionController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = FixTransaction::findOne($id)) !== null) {
+        if (($model = FixTransaction::findOne(['id' => $id, 'transaction_by' => Yii::$app->user->getId()])) !== null) {
             return $model;
         }
 
