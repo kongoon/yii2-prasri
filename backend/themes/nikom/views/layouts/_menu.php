@@ -7,17 +7,19 @@ $menu = [];
 $menu[] = ['label' => '<span>ภาพรวม</span>', 'options' => ['class' => 'navigation-header']];
 $menu[] = ['label' => '<i class="fa fa-dashboard"></i> <span>แผงควบคุม</span>', 'url' => ['/site/index']];
 
-// Register
-if (Yii::$app->user->can('pms_register_surgical') ||
-    Yii::$app->user->can('pms_register_cyto') ||
-    Yii::$app->user->can('pms_register_staining')
-    ) {
-    $menu[] = ['label' => '<span>ลงทะเบียนสิ่งส่งตรวจ</span>', 'options' => ['class' => 'navigation-header']];
-    $menu[] = ['label' => '<i class="fa fa-file-text"></i> <span>SURGICAL (SN)</span>', 'url' => ['/register/case/surgical'], 'visible' => Yii::$app->user->can('pms_register_surgical')];
-    $menu[] = ['label' => '<i class="fa fa-file-text"></i> <span>PAP (PN)</span>', 'url' => ['/register/case/pap'], 'visible' => Yii::$app->user->can('pms_register_cyto')];
-    $menu[] = ['label' => '<i class="fa fa-file-text"></i> <span>NonGyn (FN)</span>', 'url' => ['/register/case/non-gyn'], 'visible' => Yii::$app->user->can('pms_register_cyto')];
-    $menu[] = ['label' => '<i class="fa fa-file-text"></i> <span>Special Staining (EX)</span>', 'url' => ['/register/case/staining'], 'visible' => Yii::$app->user->can('pms_register_staining')];
-}
+$menu[] = ['label' => '<span>งานพัสดุ</span>', 'options' => ['class' => 'navigation-header']];
+$menu[] = ['label' => '<i class="fa fa-dashboard"></i> <span>ประเภทครุภัณฑ์</span>', 'url' => ['/supply/item-type/index']];
+$menu[] = ['label' => '<i class="fa fa-dashboard"></i> <span>ครุภัณฑ์</span>', 'url' => ['/supply/item/index']];
+
+
+$menu[] = ['label' => '<span>งานแจ้งซ่อม</span>', 'options' => ['class' => 'navigation-header']];
+$menu[] = ['label' => '<i class="fa fa-dashboard"></i> <span>การแจ้งซ่อม</span>', 'url' => ['/fix/transaction/index']];
+$menu[] = ['label' => '<i class="fa fa-dashboard"></i> <span>สถานะ</span>', 'url' => ['/fix/status/index']];
+
+$menu[] = ['label' => '<span>บริการ</span>', 'options' => ['class' => 'navigation-header']];
+$menu[] = ['label' => '<i class="fa fa-dashboard"></i> <span>การแจ้งซ่อม</span>', 'url' => ['/service/fix-transaction/index']];
+
+
 // Center
 if (Yii::$app->user->can('center')) {
     $menu[] = ['label' => '<span>ศูนย์รับสิ่งส่งตรวจ</span>', 'options' => ['class' => 'navigation-header']];
