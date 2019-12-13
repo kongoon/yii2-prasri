@@ -12,6 +12,9 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
+        'admin' => [
+            'class' => 'mdm\admin\Module',
+        ],
         'fix' => [
             'class' => 'backend\modules\fix\Module',
         ],
@@ -55,6 +58,9 @@ return [
             ],
         ],
         */
+        'authManager' => [
+            'class' => 'yii\rbac\PhpManager', // or use 'yii\rbac\DbManager'
+        ],
         'view' => [
             'theme' => [
                 'pathMap' => [
@@ -62,6 +68,13 @@ return [
                 ]
             ]
         ],
+    ],
+    'as access' => [
+        'class' => 'mdm\admin\components\AccessControl',
+        'allowActions' => [
+            'site/*',
+            'admin/*',
+        ]
     ],
     'params' => $params,
 ];
