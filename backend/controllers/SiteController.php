@@ -1,4 +1,5 @@
 <?php
+
 namespace backend\controllers;
 
 use Yii;
@@ -6,6 +7,9 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use kartik\mpdf\Pdf;
+use Mpdf\Config\ConfigVariables;
+use Mpdf\Config\FontVariables;
 
 /**
  * Site controller
@@ -20,13 +24,14 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
+
                 'rules' => [
                     [
                         'actions' => ['login', 'error'],
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'index', 'pdf'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -76,7 +81,7 @@ class SiteController extends Controller
         SUM(CASE WHEN DATE_FORMAT(FROM_UNIXTIME(transaction_at), '%m') = '12' THEN  1 ELSE 0 END) AS m12
 
         FROM fix_transaction
-        WHERE DATE_FORMAT(FROM_UNIXTIME(transaction_at), '%Y') = '".date('Y')."'
+        WHERE DATE_FORMAT(FROM_UNIXTIME(transaction_at), '%Y') = '" . date('Y') . "'
         ";
 
         $data = Yii::$app->db->createCommand($sql)->queryAll();
@@ -107,7 +112,7 @@ class SiteController extends Controller
     public function actionLogin()
     {
         $this->layout = 'main_login';
-        
+
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -134,5 +139,64 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+
+    public function actionPdf()
+    {
+        $content = $this->renderPartial('_pdf');
+
+        // setup kartik\mpdf\Pdf component
+        $pdf = new Pdf([
+            // set to use core fonts only
+            'mode' => Pdf::MODE_UTF8,
+            // A4 paper format
+            'format' => Pdf::FORMAT_A4,
+            // portrait orientation
+            'orientation' => Pdf::ORIENT_PORTRAIT,
+            // stream to browser inline
+            'destination' => Pdf::DEST_BROWSER,
+            // your html content input
+            'content' => $content,
+            // format content from your own css file if needed or use the
+            // enhanced bootstrap css built by Krajee for mPDF formatting 
+            'cssFile' => '@vendor/kartik-v/yii2-mpdf/src/assets/kv-mpdf-bootstrap.min.css',
+            // any css to be embedded if required
+            'cssInline' => 'body{font-family: "sarabun";}',
+            // set mPDF properties on the fly
+            'options' => ['title' => 'ทดสอบ'],
+            // call mPDF methods on the fly
+            'methods' => [
+                'SetHeader' => ['ทดสอบ'],
+                'SetFooter' => ['{PAGENO}'],
+            ]
+        ]);
+
+        $defaultConfig = (new ConfigVariables())->getDefaults();
+        $fontDirs = $defaultConfig['fontDir'];
+
+        $defaultFontConfig = (new FontVariables())->getDefaults();
+        $fontData = $defaultFontConfig['fontdata'];
+
+        $pdf->options['fontDir'] = array_merge($fontDirs, [
+            Yii::getAlias('@webroot') . '/fonts'
+        ]);
+
+
+
+        $pdf->options['fontdata'] = $fontData + [
+            'angsana' => [
+                'R' => 'AngsanaNew.ttf',
+                'TTCfontID' => [
+                    'R' => 1,
+                ],
+            ],
+            'sarabun' => [
+                'R' => 'THSarabunNew.ttf',
+            ]
+        ];
+
+        // return the pdf output as per the destination setting
+        return $pdf->render();
     }
 }
