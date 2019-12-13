@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = 'Update';
                 <div class="col-md-3 text-center">
                     <?= Html::img(Yii::getAlias('@web') . '/' . $model->uploadFolder . '/' . $photo, ['class' => 'img-fluid']) ?><br />
                     <?=Html::a($photo, Yii::getAlias('@web').'/'.$model->uploadFolder.'/'.$photo, ['target' => '_blank'])?>
-                    <div class="">
+                    <div class=""></div>
                         <?= Html::a('<i class="fa fa-trash"></i>', ['delete-photo', 'photo' => $photo, 'id' => $model->id], ['class' => 'btn btn-sm btn-danger', 'data' => ['confirm' => 'แน่ใจนะว่าต้องการลบ?']]) ?>
                     </div>
                 </div>
