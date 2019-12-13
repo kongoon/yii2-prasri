@@ -18,4 +18,17 @@ $this->params['breadcrumbs'][] = 'Update';
         'model' => $model,
     ]) ?>
 
+    <?php if (!empty($model->photo)) { ?>
+        <div class="row">
+            <?php foreach ($model->getPhoto() as $photo) { ?>
+                <div class="col-md-3 text-center">
+                    <?= Html::img(Yii::getAlias('@web') . '/' . $model->uploadFolder . '/' . $photo, ['class' => 'img-fluid']) ?><br />
+                    <?=Html::a($photo, Yii::getAlias('@web').'/'.$model->uploadFolder.'/'.$photo, ['target' => '_blank'])?>
+                    <div class="">
+                        <?= Html::a('<i class="fa fa-trash"></i>', ['delete-photo', 'photo' => $photo, 'id' => $model->id], ['class' => 'btn btn-sm btn-danger', 'data' => ['confirm' => 'แน่ใจนะว่าต้องการลบ?']]) ?>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    <?php } ?>
 </div>

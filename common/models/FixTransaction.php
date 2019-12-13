@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\web\UploadedFile;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "fix_transaction".
@@ -28,6 +30,7 @@ use Yii;
  */
 class FixTransaction extends \yii\db\ActiveRecord
 {
+    public $uploadFolder = 'uploads/fix';
     /**
      * {@inheritdoc}
      */
@@ -46,7 +49,7 @@ class FixTransaction extends \yii\db\ActiveRecord
             [['supply_item_id', 'transaction_at', 'transaction_by', 'get_by', 'get_at', 'fix_by', 'fix_at', 'fix_status_id'], 'integer'],
             [['detail', 'result', 'remark'], 'string'],
             [['finish_at'], 'safe'],
-            [['photo'], 'file', 'extensions' => 'jpg,png,gif', 'skipOnEmty' => true],
+            [['photo'], 'file', 'extensions' => 'jpg,png,gif', 'skipOnEmpty' => true, 'maxFiles' => 10],
             [['fix_status_id'], 'exist', 'skipOnError' => true, 'targetClass' => FixStatus::className(), 'targetAttribute' => ['fix_status_id' => 'id']],
             [['supply_item_id'], 'exist', 'skipOnError' => true, 'targetClass' => SupplyItem::className(), 'targetAttribute' => ['supply_item_id' => 'id']],
             [['transaction_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['transaction_by' => 'id']],
@@ -114,5 +117,30 @@ class FixTransaction extends \yii\db\ActiveRecord
     public function getFixBy()
     {
         return $this->hasOne(User::className(), ['id' => 'fix_by']);
+    }
+
+
+    public function upload($model)
+    {
+        $files = UploadedFile::getInstances($model, 'photo');
+        $file_names = [];
+        if($files) {
+            $old_photo = $model->getOldAttribute('photo');
+            foreach ($files as $file) {
+                $file_name = time().'_'.$file->baseName.'.'.$file->extension;
+                $file->saveAs(Yii::getAlias('@webroot').'/'.$this->uploadFolder.'/'.$file_name);
+                $file_names[] = $file_name;
+            }
+            if(!empty($old_photo)) {
+                $file_names = ArrayHelper::merge($file_names, explode(',', $old_photo));
+            }
+            return implode(',', $file_names);
+        }//if
+        return $model->isNewRecord ? '' : $model->getOldAttribute('photo');
+    }
+
+    public function getPhoto()
+    {
+        return explode(',', $this->photo);
     }
 }

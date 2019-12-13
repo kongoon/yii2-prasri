@@ -90,6 +90,7 @@ class FixTransactionController extends Controller
             }
 
             try {
+                $model->photo = $model->upload($model);
                 $model->validate();
                 $model->save();
 
@@ -123,7 +124,24 @@ class FixTransactionController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())){
+
+            try {
+                $model->photo = $model->upload($model);
+                $model->validate();
+                $model->save();
+
+                $item = SupplyItem::findOne(['id' => $model->supply_item_id]);
+                $item->is_ready = 0;
+                $item->save();
+
+                Yii::$app->session->setFlash('success', 'บันทึกข้อมูลเรียบร้อย');
+
+                //Yii::$app->hanuman->sendLine('มีการแจ้งซ่อมใหม่ ครุภัณฑ์: ' . $model->supplyItem->name . ' อาการ:' . $model->detail);
+            } catch (Exception $exception) {
+                throw new Exception('เกิดข้อผิดพลาด: ' . $exception->getMessage());
+            }
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -160,5 +178,21 @@ class FixTransactionController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionDeletePhoto($photo, $id)
+    {
+        $model = $this->findModel($id);
+        $photos = explode(',', $model->photo);
+        $photos = array_diff($photos, [$photo]);
+        unlink(Yii::getAlias('@webroot') . '/'.$model->uploadFolder. '/' . $photo);
+
+        $photos = implode(',', $photos);
+        $model->photo = $photos;
+        $model->save();
+
+        Yii::$app->session->setFlash('success', 'ลบไฟล์แล้ว');
+        return $this->redirect(['update', 'id' => $model->id]);
+
     }
 }

@@ -27,11 +27,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'detail')->textarea(['rows' => 6]) ?>
 
-    
+    <?= $form->field($model, 'photo[]')->fileInput(['multiple' => true])?>
+
     <div class="form-group">
         <?= Html::submitButton('แจ้งซ่อม', ['class' => 'btn btn-success']) ?>
     </div>
 
+    
     <?php ActiveForm::end(); ?>
 
 </div>
