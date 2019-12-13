@@ -1,6 +1,6 @@
 <?php
 
-use frontend\themes\nikom\NikomAsset;
+use backend\themes\nikom\NikomAsset;
 use common\widgets\Alert;
 use common\models\User;
 use yii\bootstrap4\Breadcrumbs;
@@ -10,7 +10,7 @@ use xtetis\bootstrap4glyphicons\assets\GlyphiconAsset;
 GlyphiconAsset::register($this);
 
 NikomAsset::register($this);
-$asset = Yii::$app->assetManager->getPublishedUrl('@frontend/themes/nikom/assets');
+$asset = Yii::$app->assetManager->getPublishedUrl('@backend/themes/nikom/assets');
 
 
 ?>
