@@ -80,6 +80,9 @@ class FixTransactionController extends Controller
                 $model->validate();
                 $model->save();
                 Yii::$app->session->setFlash('success', 'บันทึกข้อมูลเรียบร้อย');
+
+                Yii::$app->hanuman->sendLine('มีการแจ้งซ่อมใหม่ ครุภัณฑ์: '.$model->supplyItem->name.' อาการ:'.$model->detail);
+
             }catch(Exception $exception) {
                 throw new Exception('เกิดข้อผิดพลาด: '.$exception->getMessage());
             }

@@ -12,5 +12,6 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'hanuman' => ['class' => 'common\components\Hanuman'],
     ],
 ];
