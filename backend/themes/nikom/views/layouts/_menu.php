@@ -8,16 +8,16 @@ $menu[] = ['label' => '<span>ภาพรวม</span>', 'options' => ['class' =
 $menu[] = ['label' => '<i class="fa fa-dashboard"></i> <span>แผงควบคุม</span>', 'url' => ['/site/index']];
 
 $menu[] = ['label' => '<span>งานพัสดุ</span>', 'options' => ['class' => 'navigation-header']];
-$menu[] = ['label' => '<i class="fa fa-dashboard"></i> <span>ประเภทครุภัณฑ์</span>', 'url' => ['/supply/item-type/index']];
-$menu[] = ['label' => '<i class="fa fa-dashboard"></i> <span>ครุภัณฑ์</span>', 'url' => ['/supply/item/index']];
+$menu[] = ['label' => '<i class="fa fa-book"></i> <span>ประเภทครุภัณฑ์</span>', 'url' => ['/supply/item-type/index']];
+$menu[] = ['label' => '<i class="fa fa-book"></i> <span>ครุภัณฑ์</span>', 'url' => ['/supply/item/index']];
 
 
 $menu[] = ['label' => '<span>งานแจ้งซ่อม</span>', 'options' => ['class' => 'navigation-header']];
-$menu[] = ['label' => '<i class="fa fa-dashboard"></i> <span>การแจ้งซ่อม</span>', 'url' => ['/fix/transaction/index']];
-$menu[] = ['label' => '<i class="fa fa-dashboard"></i> <span>สถานะ</span>', 'url' => ['/fix/status/index']];
+$menu[] = ['label' => '<i class="fa fa-cogs"></i> <span>การแจ้งซ่อม</span>', 'url' => ['/fix/transaction/index']];
+$menu[] = ['label' => '<i class="fa fa-cogs"></i> <span>สถานะ</span>', 'url' => ['/fix/status/index']];
 
 $menu[] = ['label' => '<span>บริการ</span>', 'options' => ['class' => 'navigation-header']];
-$menu[] = ['label' => '<i class="fa fa-dashboard"></i> <span>การแจ้งซ่อม</span>', 'url' => ['/service/fix-transaction/index']];
+$menu[] = ['label' => '<i class="fa fa-cog"></i> <span>การแจ้งซ่อม</span>', 'url' => ['/service/fix-transaction/index']];
 
 
 // Center
