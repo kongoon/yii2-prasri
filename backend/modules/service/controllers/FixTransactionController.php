@@ -76,13 +76,15 @@ class FixTransactionController extends Controller
             //$model->transaction_by = Yii::$app->user->getId();
             $model->transaction_at = time();
             //$model->fix_status_id = 1;
-            $current = FixTransaction::find()->where(['supply_item_id' => $model->supply_item_id])
-                ->andWhere(['!=', 'fix_status_id', 4])
-                ->one();
+            if(FixTransaction::findOne(['supply_item_id' => $model->supply_item_id])){
+                $current = FixTransaction::find()->where(['supply_item_id' => $model->supply_item_id])
+                    ->andWhere(['!=', 'fix_status_id', 4])
+                    ->one();
 
-            if($current){
-                Yii::$app->session->setFlash('error', 'อยู่ระหว่างดำเนินการ ไม่สามารถส่งซ่อมได้อีก');
-                return $this->redirect(['index']);
+                if($current){
+                    Yii::$app->session->setFlash('error', 'อยู่ระหว่างดำเนินการ ไม่สามารถส่งซ่อมได้อีก');
+                    return $this->redirect(['index']);
+                }
             }
 
             try {
