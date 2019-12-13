@@ -45,6 +45,13 @@ return [
             ],
         ],
         */
+        'view' => [
+            'theme' => [
+                'pathMap' => [
+                    '@app/views' => '@backend/themes/nikom/views'
+                ]
+            ]
+        ],
     ],
     'params' => $params,
 ];

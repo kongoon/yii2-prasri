@@ -206,4 +206,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+    public function getPicture()
+    {
+        return 'https://placehold.it/200x250/55C1E7/fff&text=Prasri';
+    }
 }

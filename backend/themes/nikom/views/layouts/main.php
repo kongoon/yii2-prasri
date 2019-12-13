@@ -50,7 +50,7 @@ $asset = Yii::$app->assetManager->getPublishedUrl('@backend/themes/nikom/assets'
                     <li class="nav-item mr-auto">
                         <a class="navbar-brand" href="<?= Yii::$app->homeUrl ?>">
                             <img class="brand-logo" alt="PATHOLOGY" src="<?= $asset ?>/app-assets/images/logo/stack-logo.png">
-                            <h2 class="brand-text">PROLAB</h2>
+                            <h2 class="brand-text">PRASRI</h2>
                         </a>
                     </li>
                     <li class="nav-item d-none d-lg-block nav-toggle">
@@ -93,7 +93,7 @@ $asset = Yii::$app->assetManager->getPublishedUrl('@backend/themes/nikom/assets'
                                                     <?= Html::img($user->getPicture(), ['class' => 'img-responsive img-circle', 'width' => 40]) ?>
                                                 </div>
                                                 <div class="media-body">
-                                                    <h6 class="media-heading"><?= $user->realname ?></h6>
+                                                    <h6 class="media-heading"><?= $user->name ?></h6>
                                                     <small>
                                                         <time class="media-meta text-muted" datetime="<?= $user->last_login_at ?>"><?= $user->last_login_at ?>
                                                         </time>
@@ -110,8 +110,8 @@ $asset = Yii::$app->assetManager->getPublishedUrl('@backend/themes/nikom/assets'
                         <li class="dropdown dropdown-user nav-item">
                             <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                                 <span class="avatar avatar-online">
-                                    <img src="<?= Yii::$app->user->identity->getPicture() ?>" alt="<?= Yii::$app->user->identity->realname ?>"><i></i>
-                                </span><span class="user-name"><?= Yii::$app->user->identity->realname ?></span>
+                                    <img src="<?= Yii::$app->user->identity->getPicture() ?>" alt="<?= Yii::$app->user->identity->name ?>"><i></i>
+                                </span><span class="user-name"><?= Yii::$app->user->identity->name ?></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <?= Html::a('<i class="ft-user"></i> ข้อมูลส่วนตัว', ['/teacher/account/index'], ['class' => 'dropdown-item']) ?>

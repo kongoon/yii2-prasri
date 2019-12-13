@@ -1,5 +1,5 @@
 <?php
-use frontend\themes\nikom\NikomAsset;
+use backend\themes\nikom\NikomAsset;
 use frontend\widgets\Alert;
 use common\models\User;
 use yii\bootstrap4\Breadcrumbs;
