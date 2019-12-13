@@ -45,6 +45,8 @@ class FixTransaction extends \yii\db\ActiveRecord
             [['supply_item_id', 'transaction_at', 'transaction_by', 'detail', 'fix_status_id'], 'required'],
             [['supply_item_id', 'transaction_at', 'transaction_by', 'get_by', 'get_at', 'fix_by', 'fix_at', 'fix_status_id'], 'integer'],
             [['detail', 'result', 'remark'], 'string'],
+            [['finish_at'], 'safe'],
+            [['photo'], 'file', 'extensions' => 'jpg,png,gif', 'skipOnEmty' => true],
             [['fix_status_id'], 'exist', 'skipOnError' => true, 'targetClass' => FixStatus::className(), 'targetAttribute' => ['fix_status_id' => 'id']],
             [['supply_item_id'], 'exist', 'skipOnError' => true, 'targetClass' => SupplyItem::className(), 'targetAttribute' => ['supply_item_id' => 'id']],
             [['transaction_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['transaction_by' => 'id']],

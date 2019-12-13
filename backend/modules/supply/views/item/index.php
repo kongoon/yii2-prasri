@@ -35,7 +35,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'name',
             'no',
-
+            [
+                'attribute' => 'is_ready',
+                'value' => function ($model) {
+                    $arr = [0 => 'ไม่ใช้งาน', 1 => 'ใช้งาน'];
+                    return $arr[$model->is_ready];
+                }
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

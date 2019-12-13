@@ -22,6 +22,8 @@ use common\models\SupplyItemType;
 
     <?= $form->field($model, 'no')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'is_ready')->radioList([0 => 'ไม่ใช้งาน', 1 => 'ใช้งาน'])?>
+
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

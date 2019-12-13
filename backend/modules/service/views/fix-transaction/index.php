@@ -26,10 +26,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'supply_item_id',
-            'transaction_at',
-            'transaction_by',
+            //'id',
+            [
+                'attribute' => 'supply_item_id',
+                'value' => function ($model) {
+                    return $model->supplyItem->no.'-'.$model->supplyItem->name;
+                }
+            ],
+            'transaction_at:datetime',
+            [
+                'attribute' => 'transaction_by',
+                'value' => function($model) {
+                    return $model->transactionBy->name;
+                }
+            ],
             'detail:ntext',
             //'result:ntext',
             //'get_by',

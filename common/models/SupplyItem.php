@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property int $supply_item_type_id ประเภทครุภัณฑ์
+ * @property int $is_ready สถานะ
  * @property string $name ชื่อครุภัณฑ์
  * @property string $no หมายเลขครุภัณฑ์
  *
@@ -32,7 +33,7 @@ class SupplyItem extends \yii\db\ActiveRecord
     {
         return [
             [['supply_item_type_id', 'name', 'no'], 'required'],
-            [['supply_item_type_id'], 'integer'],
+            [['supply_item_type_id', 'is_ready'], 'integer'],
             [['name'], 'string', 'max' => 300],
             [['no'], 'string', 'max' => 100],
             [['supply_item_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => SupplyItemType::className(), 'targetAttribute' => ['supply_item_type_id' => 'id']],

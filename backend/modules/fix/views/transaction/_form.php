@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\datetime\DateTimePicker;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\FixTransaction */
@@ -33,6 +34,12 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'fix_status_id')->textInput() ?>
 
     <?= $form->field($model, 'remark')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'finish_at')->widget(DateTimePicker::class, [
+        'pluginOptions' => [
+            'format' => 'yyyy-mm-dd hh:ii:ss'
+        ]
+    ])?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

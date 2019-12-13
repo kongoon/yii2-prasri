@@ -18,7 +18,7 @@ class FixTransactionSearch extends FixTransaction
     {
         return [
             [['id', 'supply_item_id', 'transaction_at', 'transaction_by', 'get_by', 'get_at', 'fix_by', 'fix_at', 'fix_status_id'], 'integer'],
-            [['detail', 'result', 'remark'], 'safe'],
+            [['detail', 'result', 'remark', 'finish_at'], 'safe'],
         ];
     }
 
