@@ -7,27 +7,23 @@ $menu = [];
 $menu[] = ['label' => '<span>ภาพรวม</span>', 'options' => ['class' => 'navigation-header']];
 $menu[] = ['label' => '<i class="fa fa-dashboard"></i> <span>แผงควบคุม</span>', 'url' => ['/site/index']];
 
-$menu[] = ['label' => '<span>งานพัสดุ</span>', 'options' => ['class' => 'navigation-header']];
-$menu[] = ['label' => '<i class="fa fa-book"></i> <span>ประเภทครุภัณฑ์</span>', 'url' => ['/supply/item-type/index']];
-$menu[] = ['label' => '<i class="fa fa-book"></i> <span>ครุภัณฑ์</span>', 'url' => ['/supply/item/index']];
-
-
-$menu[] = ['label' => '<span>งานแจ้งซ่อม</span>', 'options' => ['class' => 'navigation-header']];
-$menu[] = ['label' => '<i class="fa fa-cogs"></i> <span>การแจ้งซ่อม</span>', 'url' => ['/fix/transaction/index']];
-$menu[] = ['label' => '<i class="fa fa-cogs"></i> <span>สถานะ</span>', 'url' => ['/fix/status/index']];
-
-$menu[] = ['label' => '<span>บริการ</span>', 'options' => ['class' => 'navigation-header']];
-$menu[] = ['label' => '<i class="fa fa-cog"></i> <span>การแจ้งซ่อม</span>', 'url' => ['/service/fix-transaction/index']];
-
-
-// Center
-if (Yii::$app->user->can('center')) {
-    $menu[] = ['label' => '<span>ศูนย์รับสิ่งส่งตรวจ</span>', 'options' => ['class' => 'navigation-header']];
-    $menu[] = ['label' => '<i class="fa fa-files-o"></i> <span>รายการตรวจทั้งหมด</span>', 'url' => ['/register/center/case-all']];
-
-    $menu[] = ['label' => '<span>ข้อมูล</span>', 'options' => ['class' => 'navigation-header']];
-    $menu[] = ['label' => '<i class="fa fa-user-md"></i> <span>โรงพยาบาล</span>', 'url' => ['/register/hospital/index']];
+if(Yii::$app->user->can('supply')) {
+    $menu[] = ['label' => '<span>งานพัสดุ</span>', 'options' => ['class' => 'navigation-header']];
+    $menu[] = ['label' => '<i class="fa fa-book"></i> <span>ประเภทครุภัณฑ์</span>', 'url' => ['/supply/item-type/index']];
+    $menu[] = ['label' => '<i class="fa fa-book"></i> <span>ครุภัณฑ์</span>', 'url' => ['/supply/item/index']];
 }
+
+if(Yii::$app->user->can('it')) {
+    $menu[] = ['label' => '<span>งานแจ้งซ่อม</span>', 'options' => ['class' => 'navigation-header']];
+    $menu[] = ['label' => '<i class="fa fa-cogs"></i> <span>การแจ้งซ่อม</span>', 'url' => ['/fix/transaction/index']];
+    $menu[] = ['label' => '<i class="fa fa-cogs"></i> <span>สถานะ</span>', 'url' => ['/fix/status/index']];
+}
+
+if(Yii::$app->user->can('service')) {
+    $menu[] = ['label' => '<span>บริการ</span>', 'options' => ['class' => 'navigation-header']];
+    $menu[] = ['label' => '<i class="fa fa-cog"></i> <span>การแจ้งซ่อม</span>', 'url' => ['/service/fix-transaction/index']];
+}
+
 
 // Administrator
 if (Yii::$app->user->can('administrator')) {
